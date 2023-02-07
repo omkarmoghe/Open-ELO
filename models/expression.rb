@@ -42,6 +42,8 @@ class Expression
     unless operands.all? { |o| o.value.respond_to?(operator) }
       raise InvalidOperatorError, "One or more operands do not support the operator."
     end
+
+    nil
   end
 
   def evaluate
