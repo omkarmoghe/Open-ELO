@@ -1,9 +1,11 @@
 require_relative "./scalar.rb"
 require_relative "./variable.rb"
 require_relative "./concerns/serializable"
+require_relative "./concerns/deserializable"
 
 class Expression
   include Concerns::Serializable
+  extend Concerns::Deserializable
 
   ALLOWED_OPERANDS = [
     Expression,
