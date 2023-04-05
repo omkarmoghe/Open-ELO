@@ -2,6 +2,8 @@ require "json"
 
 module Concerns
   module Deserializable
+    DeserializationError = Class.new(StandardError)
+
     # @param json [String, Hash]
     def from_json(json)
       json = JSON.parse(json) if json.is_a?(String)
@@ -20,7 +22,11 @@ module Concerns
         Variable.new(json["name"], json["value"])
       when Scalar.name
         Scalar.new(json["value"])
+      else
+        raise DeserializationError, "Object class #{json["object"]} does not support deserialization."
       end
+    rescue JSON::ParserError => e
+      raise DeserializationError, "Unable to parse JSON: #{e.message}."
     end
   end
 end
