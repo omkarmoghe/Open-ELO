@@ -1,7 +1,10 @@
 require_relative "./scalar.rb"
 require_relative "./variable.rb"
+require_relative "./concerns/serializable"
 
 class Expression
+  include Concerns::Serializable
+
   ALLOWED_OPERANDS = [
     Expression,
     Scalar,
@@ -28,6 +31,13 @@ class Expression
 
   def to_s
     "(#{operands.join(" #{operator.to_s} ")})"
+  end
+
+  def as_json
+    super.merge(
+      operator: operator,
+      operands: operands.map(&:as_json)
+    )
   end
 
   private

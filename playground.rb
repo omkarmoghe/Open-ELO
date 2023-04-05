@@ -29,5 +29,5 @@ rating_delta = Expression.new(:*, k_factor, k_multiplier)
 rating_a_new = Expression.new(:+, rating_a, rating_delta)
 
 puts rating_a_new
+puts rating_a_new.to_json(pretty: true)
 puts rating_a_new.value
-

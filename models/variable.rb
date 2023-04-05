@@ -1,4 +1,8 @@
+require_relative "./concerns/serializable"
+
 class Variable
+  include Concerns::Serializable
+
   attr_reader :name, :value
 
   def initialize(name, value)
@@ -8,5 +12,12 @@ class Variable
 
   def to_s
     "#{name}[#{value}]"
+  end
+
+  def as_json
+    super.merge(
+      name: name,
+      value: value
+    )
   end
 end
