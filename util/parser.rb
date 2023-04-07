@@ -16,7 +16,7 @@ module Util
         when Expression.name
           operator = json["operator"].to_sym
           operands_json = json["operands"]
-          operands = operands_json.map { |operand_json| Util::Parser.from_json(operand_json) }
+          operands = operands_json.map { |operand_json| from_json(operand_json) }
 
           Expression.new(operator, *operands)
         when Variable.name
