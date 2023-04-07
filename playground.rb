@@ -1,3 +1,4 @@
+require_relative "./util/parser.rb"
 require_relative "./models/variable.rb"
 require_relative "./models/expression.rb"
 require_relative "./models/scalar.rb"
@@ -32,5 +33,5 @@ puts rating_a_new.value
 puts "Testing serialization and deserialization..."
 json_string = rating_a_new.to_json(pretty: true)
 puts json_string
-parsed_expression = Expression.from_json(json_string)
+parsed_expression = Util::Parser.from_json(json_string)
 puts parsed_expression

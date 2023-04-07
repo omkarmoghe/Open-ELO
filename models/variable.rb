@@ -1,9 +1,7 @@
-require_relative "./concerns/serializable"
-require_relative "./concerns/deserializable"
+require_relative "./concerns/serializable.rb"
 
 class Variable
   include Concerns::Serializable
-  extend Concerns::Deserializable
 
   attr_reader :name, :value
 
