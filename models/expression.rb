@@ -1,6 +1,6 @@
-require_relative "./scalar.rb"
-require_relative "./variable.rb"
-require_relative "./concerns/serializable.rb"
+require_relative "./scalar"
+require_relative "./variable"
+require_relative "./concerns/serializable"
 
 class Expression
   include Concerns::Serializable

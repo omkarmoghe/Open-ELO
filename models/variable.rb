@@ -1,4 +1,4 @@
-require_relative "./concerns/serializable.rb"
+require_relative "./concerns/serializable"
 
 class Variable
   include Concerns::Serializable

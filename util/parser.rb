@@ -1,4 +1,7 @@
 require "json"
+require_relative "../models/variable"
+require_relative "../models/expression"
+require_relative "../models/scalar"
 
 module Util
   class Parser

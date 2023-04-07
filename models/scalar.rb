@@ -1,4 +1,5 @@
-require_relative "./concerns/serializable.rb"
+require_relative "./variable"
+require_relative "./concerns/serializable"
 
 class Scalar < Variable
   include Concerns::Serializable

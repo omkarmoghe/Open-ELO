@@ -1,7 +1,7 @@
-require_relative "./util/parser.rb"
-require_relative "./models/variable.rb"
-require_relative "./models/expression.rb"
-require_relative "./models/scalar.rb"
+require_relative "./util/parser"
+require_relative "./models/variable"
+require_relative "./models/expression"
+require_relative "./models/scalar"
 
 puts "ELO test..."
 
