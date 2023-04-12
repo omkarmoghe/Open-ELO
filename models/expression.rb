@@ -46,7 +46,7 @@ class Expression
     raise InvalidOperandError, "Must provide 2 or more operands." unless operands.length >= 2
 
     unless (operands.map(&:class) - ALLOWED_OPERANDS).empty?
-      raise InvalidOperandError, "Operands must be one of [Variable, Expression]."
+      raise InvalidOperandError, "Operands must be one of #{ALLOWED_OPERANDS.inspect}."
     end
 
     unless operands.all? { |o| o.value.respond_to?(operator) }
