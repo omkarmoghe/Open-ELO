@@ -40,4 +40,26 @@ class TestElo < Minitest::Test
 
     assert_equal(1016.0, @env.evaluate(rating_a_new))
   end
+
+  def test_elo_no_local_variables
+    rating_a_new = @env.evaluate(
+      # starting ratings of 2 players
+      Expression.new(:-, Variable.new("rating_b"), Variable.new("rating_a"), output: "rating_difference"),
+      Expression.new(:/, Variable.new("rating_difference"), Variable.new("scale_factor"), output: "exponent"),
+      Expression.new(
+        :+,
+        Scalar.new(1),
+        Expression.new(:**, Scalar.new(10), Variable.new("exponent")),
+        output: "denominator"
+      ),
+      Expression.new(:/, Scalar.new(1), Variable.new("denominator"), output: "expected_probability_a"),
+
+      # [0, 1] where 0 is loss, 1 is win, 0.5 is draw
+      Expression.new(:-, Variable.new("score_a"), Variable.new("expected_probability_a"), output: "k_multiplier"),
+      Expression.new(:*, Variable.new("k_factor"), Variable.new("k_multiplier"), output: "rating_delta"),
+      Expression.new(:+, Variable.new("rating_a"), Variable.new("rating_delta"), output: "rating_a_new")
+    )
+
+    assert_equal(1016.0, rating_a_new)
+  end
 end

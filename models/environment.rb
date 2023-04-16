@@ -8,8 +8,15 @@ class Environment
     @variables = variables
   end
 
-  # @param object [Expression, Variable, Scalar]
-  def evaluate(object)
+  # Evaluates each object. Returns the value of the last object
+  # @param objects [Expression, Variable, Scalar] 1 or more object to evaluate.
+  def evaluate(*objects)
+    objects.map { |object| evaluate_one(object) }.last
+  end
+
+  private
+
+  def evaluate_one(object)
     case object
     when Scalar
       object.value
@@ -19,7 +26,7 @@ class Environment
       end
     when Expression
       value = object.operands.map { |operand| evaluate(operand) }
-                             .reduce(object.operator)
+                            .reduce(object.operator)
 
       if object.output
         variables[object.output] = value
