@@ -1,4 +1,5 @@
 require "minitest/autorun"
+
 require_relative "../../models/expression"
 
 class TestExpression < Minitest::Test

@@ -1,4 +1,5 @@
 require "minitest/autorun"
+
 require_relative "../../util/parser"
 require_relative "../../models/scalar"
 

@@ -1,4 +1,5 @@
 require "minitest/autorun"
+
 require_relative "../../models/environment"
 require_relative "../../models/variable"
 require_relative "../../models/expression"
