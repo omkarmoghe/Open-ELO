@@ -1,4 +1,5 @@
 require "minitest/autorun"
+
 require_relative "../../models/environment"
 require_relative "../../models/variable"
 require_relative "../../models/scalar"
@@ -34,5 +35,38 @@ class TestEnvironment < Minitest::Test
     )
 
     assert_equal(3, @env.evaluate(expression))
+  end
+
+  def test_expression_output
+    expression = Expression.new(
+      :+,
+      Variable.new("variable_a"),
+      Variable.new("variable_b"),
+      output: "variable_c"
+    )
+
+    @env.evaluate(expression)
+    assert_equal(3, @env.variables["variable_c"])
+  end
+
+  def test_expression_update_output
+    expression1 = Expression.new(
+      :+,
+      Variable.new("variable_a"),
+      Variable.new("variable_b"),
+      output: "variable_a"
+    )
+    expression2 = Expression.new(
+      :+,
+      Variable.new("variable_a"),
+      Variable.new("variable_b"),
+      output: "variable_c"
+    )
+
+    @env.evaluate(expression1)
+    @env.evaluate(expression2)
+
+    assert_equal(3, @env.variables["variable_a"])
+    assert_equal(5, @env.variables["variable_c"])
   end
 end

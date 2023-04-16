@@ -14,12 +14,18 @@ class Environment
     when Scalar
       object.value
     when Variable
-      variables.fetch(object.name) do
-        raise MissingVariableError, "Environment missing variable #{object}."
+      variables.fetch(object.name) do |key|
+        raise MissingVariableError, "Environment missing variable #{key}."
       end
     when Expression
-      object.operands.map { |operand| evaluate(operand) }
-                     .reduce(object.operator)
+      value = object.operands.map { |operand| evaluate(operand) }
+                             .reduce(object.operator)
+
+      if object.output
+        variables[object.output] = value
+      end
+
+      value
     end
   end
 end

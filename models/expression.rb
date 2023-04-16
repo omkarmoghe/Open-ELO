@@ -14,13 +14,15 @@ class Expression
   InvalidOperatorError = Class.new(StandardError)
   InvalidOperandError = Class.new(StandardError)
 
-  attr_reader :operator, :operands
+  attr_reader :operator, :operands, :output
 
   # @param operator [String, Symbol] Mathematical operator to `reduce` the `operands` array with.
   # @param *operands [Variable, Expressions] 2 or more Variables, Scalars, or Expressions
-  def initialize(operator, *operands)
+  # @param output [String] The variable to write the expressions output to
+  def initialize(operator, *operands, output: nil)
     @operator = operator.to_sym
     @operands = operands
+    @output = output
 
     validate!
   end
@@ -32,7 +34,8 @@ class Expression
   def as_json
     super.merge(
       operator: operator.to_s,
-      operands: operands.map(&:as_json)
+      operands: operands.map(&:as_json),
+      output: output
     )
   end
 
