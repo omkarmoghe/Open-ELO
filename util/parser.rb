@@ -20,7 +20,7 @@ module Util
 
           Expression.new(operator, *operands)
         when Variable.name
-          Variable.new(json["name"], json["value"])
+          Variable.new(json["name"])
         when Scalar.name
           Scalar.new(json["value"])
         else

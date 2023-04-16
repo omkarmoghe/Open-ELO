@@ -1,15 +1,17 @@
 require_relative "./variable"
 require_relative "./concerns/serializable"
 
-class Scalar < Variable
+class Scalar
   include Concerns::Serializable
 
+  attr_reader :value
+
   def initialize(value)
-    super(value.to_s, value)
+    @value = value
   end
 
   def to_s
-    name
+    value.to_s
   end
 
   def as_json

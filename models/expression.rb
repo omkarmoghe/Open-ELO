@@ -17,16 +17,12 @@ class Expression
   attr_reader :operator, :operands
 
   # @param operator [String, Symbol] Mathematical operator to `reduce` the `operands` array with.
-  # @param *operands [Variable, Expressions] 2 or more
+  # @param *operands [Variable, Expressions] 2 or more Variables, Scalars, or Expressions
   def initialize(operator, *operands)
     @operator = operator.to_sym
     @operands = operands
 
     validate!
-  end
-
-  def value
-    @value ||= evaluate
   end
 
   def to_s
@@ -35,7 +31,7 @@ class Expression
 
   def as_json
     super.merge(
-      operator: operator,
+      operator: operator.to_s,
       operands: operands.map(&:as_json)
     )
   end
@@ -49,14 +45,6 @@ class Expression
       raise InvalidOperandError, "Operands must be one of #{ALLOWED_OPERANDS.inspect}."
     end
 
-    unless operands.all? { |o| o.value.respond_to?(operator) }
-      raise InvalidOperatorError, "One or more operands do not support the operator."
-    end
-
     nil
-  end
-
-  def evaluate
-    operands.map(&:value).reduce(operator)
   end
 end
