@@ -1,4 +1,8 @@
+require_relative "./concerns/serializable"
+
 class Environment
+  include Concerns::Serializable
+
   MissingVariableError = Class.new(StandardError)
 
   attr_reader :variables
@@ -12,6 +16,12 @@ class Environment
   # @param objects [Expression, Variable, Scalar] 1 or more object to evaluate.
   def evaluate(*objects)
     objects.map { |object| evaluate_one(object) }.last
+  end
+
+  def as_json
+    super.merge(
+      variables: variables
+    )
   end
 
   private
