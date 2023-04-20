@@ -1,0 +1,92 @@
+{
+  "object": "Expression",
+  "operator": "+",
+  "operands": [
+    {
+      "object": "Variable",
+      "name": "rating_a"
+    },
+    {
+      "object": "Expression",
+      "operator": "*",
+      "operands": [
+        {
+          "object": "Variable",
+          "name": "k_factor"
+        },
+        {
+          "object": "Expression",
+          "operator": "-",
+          "operands": [
+            {
+              "object": "Variable",
+              "name": "score_a"
+            },
+            {
+              "object": "Expression",
+              "operator": "/",
+              "operands": [
+                {
+                  "object": "Scalar",
+                  "value": 1
+                },
+                {
+                  "object": "Expression",
+                  "operator": "+",
+                  "operands": [
+                    {
+                      "object": "Scalar",
+                      "value": 1
+                    },
+                    {
+                      "object": "Expression",
+                      "operator": "**",
+                      "operands": [
+                        {
+                          "object": "Scalar",
+                          "value": 10
+                        },
+                        {
+                          "object": "Expression",
+                          "operator": "/",
+                          "operands": [
+                            {
+                              "object": "Expression",
+                              "operator": "-",
+                              "operands": [
+                                {
+                                  "object": "Variable",
+                                  "name": "rating_b"
+                                },
+                                {
+                                  "object": "Variable",
+                                  "name": "rating_a"
+                                }
+                              ],
+                              "output": null
+                            },
+                            {
+                              "object": "Variable",
+                              "name": "scale_factor"
+                            }
+                          ],
+                          "output": null
+                        }
+                      ],
+                      "output": null
+                    }
+                  ],
+                  "output": null
+                }
+              ],
+              "output": null
+            }
+          ],
+          "output": null
+        }
+      ],
+      "output": null
+    }
+  ],
+  "output": null
+}

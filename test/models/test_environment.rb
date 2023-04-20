@@ -63,8 +63,10 @@ class TestEnvironment < Minitest::Test
       output: "variable_c"
     )
 
-    @env.evaluate(expression1)
-    @env.evaluate(expression2)
+    @env.evaluate(
+      expression1,
+      expression2
+    )
 
     assert_equal(3, @env.variables["variable_a"])
     assert_equal(5, @env.variables["variable_c"])
