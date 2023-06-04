@@ -36,7 +36,7 @@ class Environment
       end
     when Expression
       value = object.operands.map { |operand| evaluate(operand) }
-                            .reduce(object.operator)
+                             .reduce(object.operator)
 
       if object.output
         variables[object.output] = value
