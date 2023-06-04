@@ -1,4 +1,4 @@
-class Rating
+class Result
   attr_reader :name, :value
 
   def initialize(name, value)
